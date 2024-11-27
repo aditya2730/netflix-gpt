@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
 import useVideoTrailer from "../hooks/useVideoTrailer";
+import VideoTitle from "./VideoTitle";
 
-const VideoBackground = ({ id }) => {
+const VideoBackground = ({ id, title, overview }) => {
+    const trailerDataFromStore = useSelector((state) => state?.movies?.trailerData);
 
-    const trailerDataFromStore = useSelector(state => state?.movies?.trailerData)
-
-    useVideoTrailer(id)
+    useVideoTrailer(id);
 
     return (
-        <div className="relative w-screen h-screen">
+        <div className="relative w-auto h-screen bg-black">
             <iframe
-                className="relative top-0 left-0 w-screen h-screen"
+                className="absolute inset-0 w-full h-full "
                 src={
                     "https://www.youtube.com/embed/" +
                     trailerDataFromStore?.key +
@@ -23,7 +23,14 @@ const VideoBackground = ({ id }) => {
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
             ></iframe>
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-l from-transparent to-black"></div>
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-black"></div>
+
+            {/* Content Overlay */}
+            <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-16 text-white">
+                <VideoTitle title={title} overview={overview} />
+            </div>
         </div>
     );
 };

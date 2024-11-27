@@ -29,11 +29,11 @@ function Header() {
     }, [navigate, userData]);
 
     return (
-        <div className="absolute top-0 left-0 bg-transparent items-center w-full px-8 py-2 z-10">
+        <div className="absolute top-0 left-0 bg-transparent items-center w-full px-8 py-2 z-10 flex justify-between">
             <img className="w-36 md:w-44" src={logo} alt="logo" />
             {userData ? <button
                 onClick={handleSignout}
-                className="absolute top-0 right-0 text-white px-4 py-2 z-10"
+                className="relative top-0 right-0 text-white px-4 py-2 z-20"
             >
                 Sign Out
             </button> : <div></div>}
