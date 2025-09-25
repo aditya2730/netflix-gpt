@@ -1,8 +1,10 @@
+import Body from "./components/Body"
+
 function App() {
   return (
-    <>
-      <div>hello world</div>
-    </>
+    <div>
+      <Body></Body>
+    </div>
   )
 }
 
