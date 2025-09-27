@@ -15,7 +15,7 @@
    1. [🗂️ State Management](#-state-management)
    1. [☁️ Cloud Integration](#-cloud-integration)
 1. [🛠️ Tech Stack](#-tech-stack)
-1. [🧰 Installation & Setup](#-installation--setup)
+1. [⚙️ Installation & Setup](#-installation--setup)
 
 </details>
 
@@ -80,11 +80,49 @@ With Firebase authentication and Redux Toolkit state management, it’s built li
 
 ---
 
-## 🧰 Installation & Setup
-
-Clone the repo and install dependencies:
+## ⚙️ Installation & Setup
 
 ```bash
+# 1. Clone the repo
 git clone https://github.com/your-username/netflix-gpt.git
 cd netflix-gpt
+
+# 2. Install dependencies
 npm install
+
+# 3. Create a .env file and add your API keys
+VITE_TMDB_API_KEY=your_tmdb_api_key
+VITE_OPENAI_API_KEY=your_openai_api_key
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+
+# 4. Start development server
+npm run dev
+
+
+📁 src
+ ┣ 📂 components     # UI Components (Header, MovieCard, etc.)
+ ┣ 📂 pages          # App pages (Login, Browse, Search)
+ ┣ 📂 store          # Redux slices and store
+ ┣ 📂 utils          # API calls, config files
+ ┣ 📜 App.jsx        # Main React App
+ ┗ 📜 main.jsx       # Entry point
+
+
+🚀 Future Enhancements
+
+👤 User profiles & watchlists
+
+⭐ Movie ratings and reviews
+
+📱 PWA support for mobile
+
+🙌 Acknowledgements
+
+🎥 TMDB API
+ – Movie data
+
+🤖 OpenAI API
+ – AI-powered search
+
+🔥 Firebase
+ – Auth & hosting
