@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../store/userSlice";
+import { LOGO_URL, USER_AVATAR } from "../utils/constants";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -12,7 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
@@ -22,6 +23,8 @@ const Header = () => {
         navigate("/");
       }
     });
+    // unsubscribe when my component unmounts
+    return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,28 +39,33 @@ const Header = () => {
   };
 
   return (
-    <div className="z-10 top-0 left-0 w-full absolute flex justify-between">
-      <img
-        className="w-52 mx-5 py-3 px-3"
-        src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-08-26/consent/87b6a5c0-0104-4e96-a291-092c11350111/0198e689-25fa-7d64-bb49-0f7e75f898d2/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="logo"
-      />
+    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-12 py-4 bg-gradient-to-b from-black/90 to-transparent">
+      {/* 🎬 Netflix Logo */}
+      <div className="flex items-center">
+        <img
+          className="w-32 md:w-44 object-contain cursor-pointer"
+          src={LOGO_URL}
+          alt="Netflix Logo"
+        />
+      </div>
+
+      {/* 👤 User Section */}
       {user && (
-        <div className="flex p-4 m-4">
+        <div className="flex items-center space-x-4">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZIOw_o4aMw44aSD0VjbWV8OvpiqPcsnLCg&s"
-            alt="user-icon"
-            className="w-8 h-8"
+            src={USER_AVATAR}
+            alt="user avatar"
+            className="w-8 h-8 md:w-10 md:h-10 rounded cursor-pointer hover:scale-105 transition-transform duration-200"
           />
           <button
-            className="font-bold text-white cursor-pointer p-1 m-1"
             onClick={handleSignOut}
+            className="text-white font-semibold px-3 py-1 rounded hover:bg-white/20 transition"
           >
-            (Sign Out)
+            Sign Out
           </button>
         </div>
       )}
-    </div>
+    </header>
   );
 };
 

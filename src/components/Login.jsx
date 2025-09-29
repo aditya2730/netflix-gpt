@@ -8,7 +8,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../store/userSlice";
+import { BG_IMG_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -69,8 +70,8 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
+          // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -85,11 +86,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          className="h-screen w-screen"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/bebd95d0-65f9-41a9-9d12-4794db63653e/web/IN-en-20250922-TRIFECTA-perspective_5e75cfb4-3797-4f17-866b-181ff91a51dd_small.jpg"
-          alt="background"
-        />
+        <img className="h-screen w-screen" src={BG_IMG_URL} alt="background" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/50"></div>
       </div>
       <form

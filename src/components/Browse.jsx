@@ -1,10 +1,23 @@
 import Header from "./Header";
+import useNowPlayingMovies from "../utils/useNowPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 
 const Browse = () => {
+  useNowPlayingMovies();
+
   return (
-    <div>
+    <div className="relative bg-black min-h-screen text-white">
+      {/* 🔥 Header */}
       <Header />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/50"></div>
+
+      {/* 🎬 Hero section */}
+      <MainContainer />
+
+      {/* 🍿 Other sections */}
+      <div className="relative z-10 bg-black">
+        <SecondaryContainer />
+      </div>
     </div>
   );
 };
