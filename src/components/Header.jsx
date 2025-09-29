@@ -8,7 +8,6 @@ import { LOGO_URL, USER_AVATAR } from "../utils/constants";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,31 +15,23 @@ const Header = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName } = user;
-        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        dispatch(addUser({ uid, email, displayName }));
         navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
       }
     });
-    // unsubscribe when my component unmounts
     return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {})
-      // eslint-disable-next-line no-unused-vars
-      .catch((error) => {
-        // An error happened.
-        navigate("/error");
-      });
+    signOut(auth).catch(() => navigate("/error"));
   };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-12 py-4 bg-gradient-to-b from-black/90 to-transparent">
-      {/* 🎬 Netflix Logo */}
+      {/* Netflix Logo */}
       <div className="flex items-center">
         <img
           className="w-32 md:w-44 object-contain cursor-pointer"
@@ -49,7 +40,7 @@ const Header = () => {
         />
       </div>
 
-      {/* 👤 User Section */}
+      {/* User Section */}
       {user && (
         <div className="flex items-center space-x-4">
           <img
