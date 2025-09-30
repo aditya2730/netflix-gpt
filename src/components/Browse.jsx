@@ -8,23 +8,30 @@ import {
   addTopRatedMovies,
   addUpcomingMovies,
 } from "../store/movieSlice";
+import { useSelector } from "react-redux";
+import GptSearchPage from "./GptSearchPage";
 
 const Browse = () => {
+  const gptSearchView = useSelector((store) => store.gptSearch.showGptSearch);
+  console.log(gptSearchView);
   usefetchMovies("now_playing", addNowPlayingMovies);
   usefetchMovies("popular", addPopularMovies);
   usefetchMovies("top_rated", addTopRatedMovies);
   usefetchMovies("upcoming", addUpcomingMovies);
 
   return (
-    <div className="relative bg-black text-white overflow-y-scroll h-screen [scrollbar-width:none] [-ms-overflow-style:none]">
-      {/* 🔥 Header */}
+    <div className="absolute top-0 left-0 w-screen text-white overflow-y-scroll h-screen overflow-hidden bg-black [scrollbar-width:none] [-ms-overflow-style:none]">
       <Header />
 
-      {/* 🎬 Hero section */}
-      <MainContainer />
+      {gptSearchView ? (
+        <GptSearchPage />
+      ) : (
+        <>
+          <MainContainer />
 
-      {/* 🍿 Movie lists overlapping hero */}
-      <SecondaryContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };
