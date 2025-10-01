@@ -6,7 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../store/userSlice";
 import { LOGO_URL, USER_AVATAR } from "../utils/constants";
-import { toggleGptSearchView } from "../store/gptSearchSlice";
+import {
+  removeMovieSuggestionResults,
+  removeMovieSuggestionResultsData,
+  setShowGptSearch,
+  toggleGptSearchView,
+} from "../store/gptSearchSlice";
+import { removeMovies } from "../store/movieSlice";
 
 const Header = () => {
   const gptSearchView = useSelector((store) => store.gptSearch.showGptSearch);
@@ -29,6 +35,10 @@ const Header = () => {
   }, []);
 
   const handleSignOut = () => {
+    dispatch(removeMovieSuggestionResults());
+    dispatch(removeMovieSuggestionResultsData());
+    dispatch(removeMovies());
+    dispatch(setShowGptSearch(false));
     signOut(auth).catch(() => navigate("/error"));
   };
 
