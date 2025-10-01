@@ -1,14 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "./constants";
 import { useEffect } from "react";
-import {
-  addNowPlayingMovies,
-  addPopularMovies,
-  addTopRatedMovies,
-  addUpcomingMovies,
-} from "../store/movieSlice";
 
-const usefetchMovies = (title, action) => {
+const useFetchMovies = (title, action) => {
   const dispatch = useDispatch();
 
   const getMovies = async () => {
@@ -26,4 +21,4 @@ const usefetchMovies = (title, action) => {
   }, []);
 };
 
-export default usefetchMovies;
+export default useFetchMovies;

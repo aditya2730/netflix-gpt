@@ -37,11 +37,11 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-12 py-4 bg-gradient-to-b from-black/80 to-transparent">
+    <header className="fixed top-0 left-0 w-full z-50 flex flex-wrap items-center justify-between px-4 md:px-12 py-4 bg-gradient-to-b from-black/80 to-transparent">
       {/* Netflix Logo */}
-      <div className="flex items-center">
+      <div className="flex items-center flex-shrink-0">
         <img
-          className="w-32 md:w-44 object-contain cursor-pointer"
+          className="w-28 md:w-44 object-contain cursor-pointer"
           src={LOGO_URL}
           alt="Netflix Logo"
         />
@@ -49,9 +49,9 @@ const Header = () => {
 
       {/* User Section */}
       {user && (
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center space-x-2 md:space-x-4 mt-2 md:mt-0">
           <button
-            className="text-white bg-purple-800 rounded-lg mx-6 px-4 py-2 hover:scale-120 transition-transform duration-200"
+            className="text-white bg-purple-800 rounded-lg px-3 py-2 hover:scale-115 transition-transform duration-200 whitespace-nowrap"
             onClick={handleClickGptSearch}
           >
             {gptSearchView ? "Browse" : "GPT-Search"}
@@ -59,11 +59,11 @@ const Header = () => {
           <img
             src={USER_AVATAR}
             alt="user avatar"
-            className="w-8 h-8 md:w-10 md:h-10 rounded cursor-pointer hover:scale-120 transition-transform duration-200"
+            className="w-8 h-8 md:w-10 md:h-10 cursor-pointer hover:scale-115 transition-transform duration-200"
           />
           <button
             onClick={handleSignOut}
-            className="text-white font-semibold px-3 py-1 rounded hover:bg-white/20 hover:scale-120 transition-transform duration-200"
+            className="text-white font-semibold px-3 py-1 rounded hover:bg-white/20 hover:scale-115 transition-transform duration-200"
           >
             Sign Out
           </button>

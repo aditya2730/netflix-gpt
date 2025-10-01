@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
@@ -57,7 +58,6 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          // eslint-disable-next-line no-unused-vars
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
@@ -70,12 +70,10 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
         })
         .catch((error) => {
           const errorCode = error.code;
-          console.log(errorCode);
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
         });
@@ -87,8 +85,10 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img className="h-screen w-screen" src={BG_IMG_URL} alt="background" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/50"></div>
+        <div className="absolute inset-0"></div>
       </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
